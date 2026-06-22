@@ -39,7 +39,7 @@
 <div class="container">
     <div class="header-box">
         <img src="hadassah-logo.png" alt="Hadassah" class="logo-img" onerror="this.style.display='none'">
-        <h1>MS Diagnostic Assistant (2024 Revisions)</h1>
+        <h1>MS Diagnostic Assistant (2024 McDonald Criteria)</h1>
     </div>
 
     <div class="gatekeeper">
@@ -114,9 +114,9 @@
     <div id="result" class="result-box"></div>
 
     <footer>
-        <p><strong>Developed by:</strong> Hadassah Medical Center Neuroimmunology Unit</p>
-        <p><strong>Reference:</strong> Montalban X, Tintore M, et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em>. 2025; 24: 850-865.</p>
-        <p><em>For educational purposes only. Final diagnosis requires clinical judgment and "no better explanation."</em></p>
+        <p><strong>Developed by:</strong> Tal Ganz, Omri Zveik. Neurology department, Hadassah Medical Center.</p>
+        <p><strong>Reference:</strong> Montalban X, Tintore M, et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em>. 2025.</p>
+        <p><em>Diagnosis assisting tool for physicians. Final diagnosis requires clinical judgment.</em></p>
     </footer>
 </div>
 
@@ -129,13 +129,9 @@
         const isADEM = (pres === 'adem');
         const isOld = document.getElementById('age_50').checked || document.getElementById('vasc_risk').checked;
 
-        // Dynamic MOG container container visibility
         document.getElementById('mog_logic_container').style.display = (isPediatric || isADEM) ? 'block' : 'none';
-        
-        // Spinal Progressive checkbox row
         document.getElementById('sp_prog_box').style.display = (pres === 'progressive') ? 'block' : 'none';
         
-        // Profile Alerts & Dynamic text based on exact sub-age
         const pedAlert = document.getElementById('ped_alert');
         if (isUnder12 || isADEM) {
             pedAlert.style.display = 'block';
@@ -170,7 +166,6 @@
             return;
         }
 
-        // DIS Counting
         const sites = [];
         if (document.getElementById('pv').checked) sites.push('pv');
         if (document.getElementById('ct').checked) sites.push('ct');
