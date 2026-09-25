@@ -35,7 +35,7 @@
             margin: 0 auto; 
             padding: 15px; 
             background-color: #f4f7f6; 
-            transition: background-color 0.2s, color 0.2s;
+            transition: background-color 0.2s, color 0.2s; 
         }
 
         .container { 
@@ -46,10 +46,10 @@
             position: relative;
         }
 
-        /* Accessibility Widget */
+        /* Accessibility Widget - Positioned lower to avoid overlapping header */
         .a11y-widget {
             position: fixed;
-            top: 15px;
+            top: 85px;
             right: 15px;
             z-index: 1000;
         }
@@ -407,7 +407,7 @@
             }
 
             .a11y-widget {
-                top: 10px;
+                top: 75px;
                 right: 10px;
             }
         }
@@ -478,7 +478,7 @@
         
         <div id="ped_alert" class="alert hidden" style="background: #d1ecf1; color: #0c5460; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 0.9rem;"></div>
         <div id="red_alert" class="alert hidden" style="background: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 0.9rem;">
-            <strong>Diagnostic Caution:</strong> In patients &ge; 50y or with vascular risk, additional confirmation (Spinal MRI, CSF, or CVS) is strongly recommended[cite: 1].
+            <strong>Diagnostic Caution:</strong> In patients &ge; 50y or with vascular risk, additional confirmation (Spinal MRI, CSF, or CVS) is strongly recommended.
         </div>
     </section>
 
@@ -509,7 +509,7 @@
                     <label class="checkbox-item">
                         <input type="checkbox" id="sc_2"> 
                         <span class="tooltip">Spinal Cord (&ge;2 lesions)
-                            <span class="tooltiptext">In Progressive MS (PPMS), 2 or more spinal lesions alone satisfy DIS criteria[cite: 1].</span>
+                            <span class="tooltiptext">In Progressive MS (PPMS), 2 or more spinal lesions alone satisfy DIS criteria.</span>
                         </span>
                     </label>
                 </div>
@@ -517,7 +517,7 @@
                 <label class="checkbox-item">
                     <input type="checkbox" id="on_check"> 
                     <span class="tooltip">Optic Nerve Involvement
-                        <span class="tooltiptext"><b>Verification Thresholds:</b><br>&bull; MRI: One or more intrinsic lesions[cite: 1].<br>&bull; OCT: Inter-eye difference (pRNFL &ge;6&mu;m or GCIPL &ge;4&mu;m)[cite: 1].<br>&bull; VEP: Delayed P100 latency (&gt;2.5 SD from mean)[cite: 1].</span>
+                        <span class="tooltiptext"><b>Verification Thresholds:</b><br>&bull; MRI: One or more intrinsic lesions.<br>&bull; OCT: Inter-eye difference (pRNFL &ge;6&mu;m or GCIPL &ge;4&mu;m).<br>&bull; VEP: Delayed P100 latency (&gt;2.5 SD from mean).</span>
                     </span>
                 </label>
             </div>
@@ -527,28 +527,28 @@
                 <label class="checkbox-item">
                     <input type="checkbox" id="csf"> 
                     <span class="tooltip">CSF Positive (OCB/kFLC)
-                        <span class="tooltiptext">Demonstrated intrathecal IgG synthesis: OCB or positive Kappa Free Light Chain (kFLC) index are interchangeable[cite: 1].</span>
+                        <span class="tooltiptext">Demonstrated intrathecal IgG synthesis: OCB or positive Kappa Free Light Chain (kFLC) index are interchangeable.</span>
                     </span>
                 </label>
 
                 <label class="checkbox-item">
                     <input type="checkbox" id="cvs"> 
                     <span class="tooltip">CVS Positive
-                        <span class="tooltiptext"><b>Select 6 Rule:</b> &ge;6 CVS+ lesions; or majority if &lt;10 lesions exist[cite: 1].<br><b>Pediatrics:</b> Positive only if &ge;50% of lesions show CVS[cite: 1].</span>
+                        <span class="tooltiptext"><b>Select 6 Rule:</b> &ge;6 CVS+ lesions; or majority if &lt;10 lesions exist.<br><b>Pediatrics:</b> Positive only if &ge;50% of lesions show CVS.</span>
                     </span>
                 </label>
 
                 <label class="checkbox-item">
                     <input type="checkbox" id="dit"> 
                     <span class="tooltip">DIT Positive
-                        <span class="tooltiptext">New T2 lesion on follow-up, or simultaneous Gad+ and Gad- lesions on a single scan[cite: 1].</span>
+                        <span class="tooltiptext">New T2 lesion on follow-up, or simultaneous Gad+ and Gad- lesions on a single scan.</span>
                     </span>
                 </label>
 
                 <label class="checkbox-item">
                     <input type="checkbox" id="prl"> 
                     <span class="tooltip">PRL Positive
-                        <span class="tooltiptext">Paramagnetic Rim Lesions: Presence of &ge;1 chronic active lesion with a characteristic iron rim[cite: 1].</span>
+                        <span class="tooltiptext">Paramagnetic Rim Lesions: Presence of &ge;1 chronic active lesion with a characteristic iron rim.</span>
                     </span>
                 </label>
             </div>
@@ -561,7 +561,7 @@
 
     <footer>
         <p><strong>Developed by:</strong> Tal Ganz, Omri Zveik-Lavi. Neurology department, Hadassah-Hebrew University Medical Center.</p>
-        <p><strong>Reference:</strong> Montalban X, Tintore M, et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em>. 2025[cite: 1].</p>
+        <p><strong>Reference:</strong> Montalban X, Tintore M, et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em>. 2025.</p>
         <p><em>For physician use only. Does not replace clinical judgment; final responsibility rests with the user.</em></p>
     </footer>
 </div>
@@ -613,10 +613,10 @@
         const pedAlert = document.getElementById('ped_alert');
         if (isUnder12 || isADEM) {
             pedAlert.style.display = 'block';
-            pedAlert.innerHTML = "<strong>Pediatric Alert:</strong> MOG-IgG testing is strongly recommended for children &lt; 12y or ADEM presentations[cite: 1]. CVS is positive only if &ge; 50% of lesions are involved[cite: 1].";
+            pedAlert.innerHTML = "<strong>Pediatric Alert:</strong> MOG-IgG testing is strongly recommended for children &lt; 12y or ADEM presentations. CVS is positive only if &ge; 50% of lesions are involved.";
         } else if (is12to18) {
             pedAlert.style.display = 'block';
-            pedAlert.innerHTML = "<strong>Pediatric Alert:</strong> MOG-IgG testing is recommended in non-specific symptoms or suggestive of MOGAD[cite: 1]. CVS is positive only if &ge; 50% of lesions are involved[cite: 1].";
+            pedAlert.innerHTML = "<strong>Pediatric Alert:</strong> MOG-IgG testing is recommended in non-specific symptoms or suggestive of MOGAD. CVS is positive only if &ge; 50% of lesions are involved.";
         } else {
             pedAlert.style.display = 'none';
         }
@@ -635,7 +635,7 @@
 
         if (!mimicsExcluded) {
             res.className = "result-box res-negative";
-            res.innerHTML = "<strong>Gatekeeper:</strong> Please confirm that mimics and better explanations have been excluded[cite: 1].";
+            res.innerHTML = "<strong>Gatekeeper:</strong> Please confirm that mimics and better explanations have been excluded.";
             return;
         }
 
@@ -675,22 +675,22 @@
 
             if (effectiveDIS >= 4) {
                 status = "positive";
-                msg = "DIS criteria met (4+ sites)[cite: 1].";
+                msg = "DIS criteria met (4+ sites).";
             } else if (effectiveDIS >= 2 && (csf || dit || cvs)) {
                 status = "positive";
-                msg = "DIS criteria met (&ge;2 sites) with supportive evidence (CSF, DIT, or CVS)[cite: 1].";
+                msg = "DIS criteria met (&ge;2 sites) with supportive evidence (CSF, DIT, or CVS).";
             } else if (effectiveDIS === 1 && ((csf || dit) && (cvs || prl))) {
                 status = "positive";
-                msg = "Single-location pathway met (Supportive Marker + Specificity Marker)[cite: 1].";
+                msg = "Single-location pathway met (Supportive Marker + Specificity Marker).";
             }
         } else if (pres === 'ris') {
             if (disCount >= 2 && (csf || cvs || dit)) {
                 status = "positive";
-                msg = "RIS criteria met (DIS &ge;2 + supportive marker)[cite: 1].";
+                msg = "RIS criteria met (DIS &ge;2 + supportive marker).";
             }
         } else if (isADEM) {
             res.className = "result-box res-negative";
-            res.innerHTML = "<strong>Diagnosis Deferred:</strong> In ADEM-like presentations, MS cannot be diagnosed until a second typical attack occurs or new lesions appear &gt; 90 days from onset[cite: 1].";
+            res.innerHTML = "<strong>Diagnosis Deferred:</strong> In ADEM-like presentations, MS cannot be diagnosed until a second typical attack occurs or new lesions appear &gt; 90 days from onset.";
             return;
         }
 
@@ -699,12 +699,12 @@
             let warnings = [];
 
             if (isOld && !(document.getElementById('sc_1').checked || csf || cvs)) {
-                warnings.push("⚠️ <strong>Caution:</strong> In patients &ge;50y or with vascular risks, confirmation via Spinal, CSF, or CVS is strongly recommended to avoid misdiagnosis[cite: 1].");
+                warnings.push("⚠️ <strong>Caution:</strong> In patients &ge;50y or with vascular risks, confirmation via Spinal, CSF, or CVS is strongly recommended to avoid misdiagnosis.");
             }
             if ((isUnder12 || isADEM) && !mogChecked) {
-                warnings.push("ℹ️ <strong>Pediatric Note:</strong> Differential diagnosis for MOGAD is mandatory (MOG-IgG check strongly recommended)[cite: 1].");
+                warnings.push("ℹ️ <strong>Pediatric Note:</strong> Differential diagnosis for MOGAD is mandatory (MOG-IgG check strongly recommended).");
             } else if (is12to18 && !mogChecked) {
-                warnings.push("ℹ️ <strong>Pediatric Note:</strong> MOG-IgG testing is recommended if symptoms are non-specific or suggestive of MOGAD[cite: 1].");
+                warnings.push("ℹ️ <strong>Pediatric Note:</strong> MOG-IgG testing is recommended if symptoms are non-specific or suggestive of MOGAD.");
             }
 
             if (warnings.length > 0) {
@@ -716,7 +716,7 @@
             }
         } else {
             res.className = "result-box res-negative";
-            res.innerHTML = "<strong>Criteria not fully met.</strong> Monitor clinical course or re-evaluate differential diagnosis[cite: 1].";
+            res.innerHTML = "<strong>Criteria not fully met.</strong> Monitor clinical course or re-evaluate differential diagnosis.";
         }
     }
 </script>
