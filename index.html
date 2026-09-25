@@ -15,7 +15,12 @@
         h2 { font-size: 1.1rem; color: var(--primary); margin-top: 0; margin-bottom: 10px; border-bottom: 1px solid #eee; }
         
         .gatekeeper { background: #fff3cd; border: 2px solid #ffeeba; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-weight: bold; text-align: center; }
-        .flex-row { display: flex; flex-wrap: wrap; gap: 15px; background: #f9f9f9; padding: 10px; border-radius: 6px; align-items: center; }
+        
+        /* Divided Profile Structure */
+        .profile-group { margin-bottom: 12px; }
+        .profile-group:last-child { margin-bottom: 0; }
+        .profile-label { font-size: 0.85rem; font-weight: bold; color: #555; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.5px; }
+        .flex-row { display: flex; flex-wrap: wrap; gap: 15px; background: #f9f9f9; padding: 8px 12px; border-radius: 6px; align-items: center; }
         .flex-row label { font-size: 0.9rem; font-weight: 500; cursor: pointer; }
 
         .tooltip { position: relative; display: inline-block; border-bottom: 1px dotted var(--secondary); cursor: help; color: var(--secondary); font-weight: 500; }
@@ -30,7 +35,9 @@
         button { background-color: var(--secondary); color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; font-size: 1rem; }
         button:hover { background-color: #2980b9; }
 
-        footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; font-size: 0.85rem; color: #7f8c8d; text-align: center; }
+        /* Compact Footer */
+        footer { margin-top: 30px; padding-top: 15px; border-top: 1px solid #eee; font-size: 0.85rem; color: #7f8c8d; text-align: center; }
+        footer p { margin: 3px 0; line-height: 1.3; }
         .hidden { display: none; }
     </style>
 </head>
@@ -42,49 +49,65 @@
         <h1>MS Diagnostic Assistant (2024 McDonald Criteria)</h1>
     </div>
 
+    <!-- Mandatory Gatekeeper -->
     <div class="gatekeeper">
         <input type="checkbox" id="mimics_excluded"> 
         <label for="mimics_excluded">I confirm that symptoms are typical for MS and all mimics/better explanations have been excluded.</label>
     </div>
 
+    <!-- 1. Patient Profile (Divided into Age and Risk Factors) -->
     <section id="profile_section">
         <h2>1. Patient Profile</h2>
-        <div class="flex-row">
-            <div><input type="checkbox" id="peds_under_12"> <label for="peds_under_12">< 12y</label></div>
-            <div><input type="checkbox" id="peds_12_18"> <label for="peds_12_18">12-18y</label></div>
-            <div><input type="checkbox" id="age_50"> <label for="age_50">≥ 50y</label></div>
-            <div>
-                <input type="checkbox" id="vasc_risk"> 
-                <label for="vasc_risk" class="tooltip">Vascular Risk
-                    <span class="tooltiptext">Includes: Hypertension, Smoking, Diabetes, Hyperlipidemia, or known Macrovascular disease (Panel 6).</span>
-                </label>
+        
+        <div class="profile-group">
+            <div class="profile-label">Age at Presentation</div>
+            <div class="flex-row">
+                <div><input type="checkbox" id="peds_under_12"> <label for="peds_under_12">&lt; 12y</label></div>
+                <div><input type="checkbox" id="peds_12_18"> <label for="peds_12_18">12–18y</label></div>
+                <div><input type="checkbox" id="age_18_50"> <label for="age_18_50">18–50y</label></div>
+                <div><input type="checkbox" id="age_50"> <label for="age_50">&ge; 50y</label></div>
             </div>
-            
-            <div id="mog_logic_container" class="hidden" style="border-left: 2px solid #ccc; padding-left: 10px; margin-left: 5px;">
-                <input type="checkbox" id="mog_checked"> 
-                <label for="mog_checked" class="tooltip">MOG-IgG Checked
-                    <span class="tooltiptext">Recommended/Mandatory in selected pediatric or atypical populations to exclude MOGAD before confirming MS.</span>
-                </label>
+        </div>
+
+        <div class="profile-group">
+            <div class="profile-label">Risk Factors & Special Workup</div>
+            <div class="flex-row">
+                <div>
+                    <input type="checkbox" id="vasc_risk"> 
+                    <label for="vasc_risk" class="tooltip">Vascular Risk
+                        <span class="tooltiptext">Includes: Hypertension, Smoking, Diabetes, Hyperlipidemia, or known Macrovascular disease.</span>
+                    </label>
+                </div>
+                
+                <!-- Dynamic MOG Option (Triggers for Peds or ADEM) -->
+                <div id="mog_logic_container" class="hidden">
+                    <input type="checkbox" id="mog_checked"> 
+                    <label for="mog_checked" class="tooltip">MOG-IgG Checked
+                        <span class="tooltiptext">Recommended/Mandatory in selected pediatric or atypical populations to exclude MOGAD before confirming MS.</span>
+                    </label>
+                </div>
             </div>
         </div>
         
-        <div id="ped_alert" class="alert info-alert hidden" style="background: #d1ecf1; color: #0c5460; padding: 10px; border-radius: 5px; margin-top: 10px;"></div>
-        <div id="red_alert" class="alert red-flag-alert hidden" style="background: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-top: 10px;">
-            <strong>Diagnostic Caution:</strong> In patients ≥ 50y or with vascular risk, additional confirmation (Spinal MRI, CSF, or CVS) is strongly recommended.
+        <div id="ped_alert" class="alert hidden" style="background: #d1ecf1; color: #0c5460; padding: 10px; border-radius: 5px; margin-top: 10px;"></div>
+        <div id="red_alert" class="alert hidden" style="background: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-top: 10px;">
+            <strong>Diagnostic Caution:</strong> In patients &ge; 50y or with vascular risk, additional confirmation (Spinal MRI, CSF, or CVS) is strongly recommended[cite: 1].
         </div>
     </section>
 
+    <!-- 2. Clinical Presentation -->
     <section>
         <h2>2. Clinical Presentation</h2>
         <select id="presentation" onchange="updateUi()" style="width:100%; padding:8px;">
             <option value="">-- Select Presentation --</option>
             <option value="relapsing">Typical Attack (Relapsing-Onset / CIS)</option>
-            <option value="progressive">Objective Progression (≥ 12 months)</option>
+            <option value="progressive">Objective Progression (&ge; 12 months)</option>
             <option value="ris">RIS / Non-specific Symptoms</option>
             <option value="adem">ADEM-like Presentation</option>
         </select>
     </section>
 
+    <!-- 3. Evidence & Biomarkers -->
     <section>
         <h2>3. Evidence & Biomarkers</h2>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -95,16 +118,16 @@
                 <input type="checkbox" id="it"> Infratentorial<br>
                 <input type="checkbox" id="sc_1"> Spinal Cord (Typical Lesion)<br>
                 <div id="sp_prog_box" class="hidden" style="padding-left:15px; border-left: 2px solid #eee;">
-                    <input type="checkbox" id="sc_2"> <label for="sc_2" class="tooltip">Spinal Cord (≥2 lesions)<span class="tooltiptext">In Progressive MS (PPMS), 2 or more spinal lesions alone satisfy DIS criteria.</span></label>
+                    <input type="checkbox" id="sc_2"> <label for="sc_2" class="tooltip">Spinal Cord (&ge;2 lesions)<span class="tooltiptext">In Progressive MS (PPMS), 2 or more spinal lesions alone satisfy DIS criteria[cite: 1].</span></label>
                 </div>
-                <input type="checkbox" id="on_check"> <label class="tooltip">Optic Nerve Involvement<span class="tooltiptext"><b>Verification Thresholds:</b><br>• MRI: One or more intrinsic lesions.<br>• OCT: Inter-eye difference (pRNFL ≥6μm or GCIPL ≥4μm).<br>• VEP: Delayed P100 latency (>2.5 SD from mean).</span></label>
+                <input type="checkbox" id="on_check"> <label class="tooltip">Optic Nerve Involvement<span class="tooltiptext"><b>Verification Thresholds:</b><br>&bull; MRI: One or more intrinsic lesions[cite: 1].<br>&bull; OCT: Inter-eye difference (pRNFL &ge;6&mu;m or GCIPL &ge;4&mu;m)[cite: 1].<br>&bull; VEP: Delayed P100 latency (&gt;2.5 SD from mean)[cite: 1].</span></label>
             </div>
             <div>
                 <strong>Supportive Biomarkers:</strong><br>
-                <input type="checkbox" id="csf"> <span class="tooltip">CSF Positive (OCB/kFLC)<span class="tooltiptext">Demonstrated intrathecal IgG synthesis: OCB or positive Kappa Free Light Chain (kFLC) index are interchangeable.</span></span><br>
-                <input type="checkbox" id="cvs"> <span class="tooltip">CVS Positive<span class="tooltiptext"><b>Select 6 Rule:</b> ≥6 CVS+ lesions; or majority if <10 lesions exist.<br><b>Pediatrics:</b> Positive only if ≥50% of lesions show CVS.</span></span><br>
-                <input type="checkbox" id="dit"> <span class="tooltip">DIT Positive<span class="tooltiptext">New T2 lesion on follow-up, or simultaneous Gad+ and Gad- lesions on a single scan.</span></span><br>
-                <input type="checkbox" id="prl"> <span class="tooltip">PRL Positive<span class="tooltiptext">Paramagnetic Rim Lesions: Presence of ≥1 chronic active lesion with a characteristic iron rim.</span></span>
+                <input type="checkbox" id="csf"> <span class="tooltip">CSF Positive (OCB/kFLC)<span class="tooltiptext">Demonstrated intrathecal IgG synthesis: OCB or positive Kappa Free Light Chain (kFLC) index are interchangeable[cite: 1].</span></span><br>
+                <input type="checkbox" id="cvs"> <span class="tooltip">CVS Positive<span class="tooltiptext"><b>Select 6 Rule:</b> &ge;6 CVS+ lesions; or majority if &lt;10 lesions exist[cite: 1].<br><b>Pediatrics:</b> Positive only if &ge;50% of lesions show CVS[cite: 1].</span></span><br>
+                <input type="checkbox" id="dit"> <span class="tooltip">DIT Positive<span class="tooltiptext">New T2 lesion on follow-up, or simultaneous Gad+ and Gad- lesions on a single scan[cite: 1].</span></span><br>
+                <input type="checkbox" id="prl"> <span class="tooltip">PRL Positive<span class="tooltiptext">Paramagnetic Rim Lesions: Presence of &ge;1 chronic active lesion with a characteristic iron rim[cite: 1].</span></span>
             </div>
         </div>
     </section>
@@ -113,9 +136,10 @@
 
     <div id="result" class="result-box"></div>
 
+    <!-- Compact Footer -->
     <footer>
         <p><strong>Developed by:</strong> Tal Ganz, Omri Zveik. Neurology department, Hadassah Medical Center.</p>
-        <p><strong>Reference:</strong> Montalban X, Tintore M, et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em>. 2025.</p>
+        <p><strong>Reference:</strong> Montalban X, Tintore M, et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em>. 2025[cite: 1].</p>
         <p><em>Diagnosis assisting tool for physicians. Final diagnosis requires clinical judgment.</em></p>
     </footer>
 </div>
@@ -129,16 +153,20 @@
         const isADEM = (pres === 'adem');
         const isOld = document.getElementById('age_50').checked || document.getElementById('vasc_risk').checked;
 
+        // Dynamic MOG container visibility
         document.getElementById('mog_logic_container').style.display = (isPediatric || isADEM) ? 'block' : 'none';
+        
+        // Spinal Progressive checkbox row
         document.getElementById('sp_prog_box').style.display = (pres === 'progressive') ? 'block' : 'none';
         
+        // Alerts
         const pedAlert = document.getElementById('ped_alert');
         if (isUnder12 || isADEM) {
             pedAlert.style.display = 'block';
-            pedAlert.innerHTML = "<strong>Pediatric Alert:</strong> MOG-IgG testing is strongly recommended for children &lt; 12y or ADEM presentations. CVS is positive only if &ge; 50% of lesions are involved.";
+            pedAlert.innerHTML = "<strong>Pediatric Alert:</strong> MOG-IgG testing is strongly recommended for children &lt; 12y or ADEM presentations[cite: 1]. CVS is positive only if &ge; 50% of lesions are involved[cite: 1].";
         } else if (is12to18) {
             pedAlert.style.display = 'block';
-            pedAlert.innerHTML = "<strong>Pediatric Alert:</strong> MOG-IgG testing is recommended in non-specific symptoms or suggestive of MOGAD. CVS is positive only if &ge; 50% of lesions are involved.";
+            pedAlert.innerHTML = "<strong>Pediatric Alert:</strong> MOG-IgG testing is recommended in non-specific symptoms or suggestive of MOGAD[cite: 1]. CVS is positive only if &ge; 50% of lesions are involved[cite: 1].";
         } else {
             pedAlert.style.display = 'none';
         }
@@ -155,7 +183,7 @@
 
         if (!mimicsExcluded) {
             res.className = "result-box res-negative";
-            res.innerHTML = "<strong>Gatekeeper:</strong> Please confirm that mimics and better explanations have been excluded.";
+            res.innerHTML = "<strong>Gatekeeper:</strong> Please confirm that mimics and better explanations have been excluded[cite: 1].";
             return;
         }
 
@@ -195,22 +223,22 @@
 
             if (effectiveDIS >= 4) {
                 status = "positive";
-                msg = "DIS criteria met (4+ sites).";
+                msg = "DIS criteria met (4+ sites)[cite: 1].";
             } else if (effectiveDIS >= 2 && (csf || dit || cvs)) {
                 status = "positive";
-                msg = "DIS criteria met (≥2 sites) with supportive evidence (CSF, DIT, or CVS).";
+                msg = "DIS criteria met (&ge;2 sites) with supportive evidence (CSF, DIT, or CVS)[cite: 1].";
             } else if (effectiveDIS === 1 && ((csf || dit) && (cvs || prl))) {
                 status = "positive";
-                msg = "Single-location pathway met (Supportive Marker + Specificity Marker).";
+                msg = "Single-location pathway met (Supportive Marker + Specificity Marker)[cite: 1].";
             }
         } else if (pres === 'ris') {
             if (disCount >= 2 && (csf || cvs || dit)) {
                 status = "positive";
-                msg = "RIS criteria met (DIS ≥2 + supportive marker).";
+                msg = "RIS criteria met (DIS &ge;2 + supportive marker)[cite: 1].";
             }
         } else if (isADEM) {
             res.className = "result-box res-negative";
-            res.innerHTML = "<strong>Diagnosis Deferred:</strong> In ADEM-like presentations, MS cannot be diagnosed until a second typical attack occurs or new lesions appear > 90 days from onset.";
+            res.innerHTML = "<strong>Diagnosis Deferred:</strong> In ADEM-like presentations, MS cannot be diagnosed until a second typical attack occurs or new lesions appear &gt; 90 days from onset[cite: 1].";
             return;
         }
 
@@ -219,12 +247,12 @@
             let warnings = [];
 
             if (isOld && !(document.getElementById('sc_1').checked || csf || cvs)) {
-                warnings.push("⚠️ <strong>Caution:</strong> In patients ≥50y or with vascular risks, confirmation via Spinal, CSF, or CVS is strongly recommended to avoid misdiagnosis.");
+                warnings.push("⚠️ <strong>Caution:</strong> In patients &ge;50y or with vascular risks, confirmation via Spinal, CSF, or CVS is strongly recommended to avoid misdiagnosis[cite: 1].");
             }
             if ((isUnder12 || isADEM) && !mogChecked) {
-                warnings.push("ℹ️ <strong>Pediatric Note:</strong> Differential diagnosis for MOGAD is mandatory (MOG-IgG check strongly recommended).");
+                warnings.push("ℹ️ <strong>Pediatric Note:</strong> Differential diagnosis for MOGAD is mandatory (MOG-IgG check strongly recommended)[cite: 1].");
             } else if (is12to18 && !mogChecked) {
-                warnings.push("ℹ️ <strong>Pediatric Note:</strong> MOG-IgG testing is recommended if symptoms are non-specific or suggestive of MOGAD.");
+                warnings.push("ℹ️ <strong>Pediatric Note:</strong> MOG-IgG testing is recommended if symptoms are non-specific or suggestive of MOGAD[cite: 1].");
             }
 
             if (warnings.length > 0) {
@@ -236,7 +264,7 @@
             }
         } else {
             res.className = "result-box res-negative";
-            res.innerHTML = "<strong>Criteria not fully met.</strong> Monitor clinical course or re-evaluate differential diagnosis.";
+            res.innerHTML = "<strong>Criteria not fully met.</strong> Monitor clinical course or re-evaluate differential diagnosis[cite: 1].";
         }
     }
 </script>
