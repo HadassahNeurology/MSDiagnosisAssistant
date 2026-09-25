@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MS Diagnostic Assistant | Hadassah</title>
-    <!-- Import Google Font: Roboto Condensed -->
+    <!-- Import Google Font: Roboto (Regular) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root { 
             --primary: #2c3e50; 
@@ -15,12 +15,17 @@
             --success: #27ae60; 
             --warning: #f39c12; 
             --danger: #e74c3c; 
+            --base-font-size: 16px;
         }
         
         * {
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
-            font-family: 'Roboto Condensed', sans-serif;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        html {
+            font-size: var(--base-font-size);
         }
 
         body { 
@@ -30,6 +35,7 @@
             margin: 0 auto; 
             padding: 15px; 
             background-color: #f4f7f6; 
+            transition: background-color 0.2s, color 0.2s;
         }
 
         .container { 
@@ -37,6 +43,143 @@
             padding: 25px; 
             border-radius: 12px; 
             box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+            position: relative;
+        }
+
+        /* Accessibility Widget */
+        .a11y-widget {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+        }
+
+        .a11y-toggle-btn {
+            background-color: #2c3e50;
+            color: #fff;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .a11y-toggle-btn:hover {
+            transform: scale(1.05);
+            background-color: #34495e;
+        }
+
+        .a11y-menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            padding: 12px;
+            width: 210px;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .a11y-menu.show {
+            display: flex;
+        }
+
+        .a11y-menu h3 {
+            margin: 0 0 5px 0;
+            font-size: 0.9rem;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 4px;
+            text-align: center;
+        }
+
+        .a11y-btn {
+            background: #f0f4f8;
+            border: 1px solid #dcdcdc;
+            padding: 8px 10px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 500;
+            color: #333;
+            transition: background 0.15s;
+        }
+
+        .a11y-btn:hover {
+            background: #e2e8f0;
+        }
+
+        /* High Contrast Theme */
+        body.high-contrast {
+            background-color: #000000 !important;
+            color: #ffff00 !important;
+        }
+
+        body.high-contrast .container {
+            background-color: #121212 !important;
+            color: #ffffff !important;
+            border: 2px solid #ffff00 !important;
+            box-shadow: none !important;
+        }
+
+        body.high-contrast section,
+        body.high-contrast .flex-row,
+        body.high-contrast .gatekeeper {
+            background-color: #000000 !important;
+            border-color: #ffff00 !important;
+            color: #ffffff !important;
+        }
+
+        body.high-contrast h1,
+        body.high-contrast h2,
+        body.high-contrast .subtitle,
+        body.high-contrast strong {
+            color: #ffff00 !important;
+            border-color: #ffff00 !important;
+        }
+
+        body.high-contrast .tooltip {
+            color: #00ffff !important;
+            border-bottom-color: #00ffff !important;
+        }
+
+        body.high-contrast .tooltip .tooltiptext {
+            background-color: #222 !important;
+            border: 1px solid #ffff00 !important;
+            color: #ffffff !important;
+        }
+
+        body.high-contrast select,
+        body.high-contrast button {
+            background-color: #000000 !important;
+            color: #ffff00 !important;
+            border: 2px solid #ffff00 !important;
+        }
+
+        body.high-contrast button:hover {
+            background-color: #333333 !important;
+        }
+
+        body.high-contrast .a11y-menu {
+            background-color: #121212 !important;
+            border-color: #ffff00 !important;
+        }
+
+        body.high-contrast .a11y-btn {
+            background-color: #222 !important;
+            color: #ffff00 !important;
+            border-color: #ffff00 !important;
         }
 
         /* Centered Header Layout */
@@ -63,12 +206,13 @@
             margin: 0; 
             line-height: 1.3;
             text-align: center;
+            font-weight: 700;
         }
 
         .subtitle {
             font-size: 0.95rem;
             color: #555;
-            font-weight: 500;
+            font-weight: 400;
             display: block;
             margin-top: 4px;
         }
@@ -87,6 +231,7 @@
             margin-bottom: 12px; 
             border-bottom: 1px solid #eee; 
             padding-bottom: 5px; 
+            font-weight: 500;
         }
         
         .gatekeeper { 
@@ -95,7 +240,7 @@
             padding: 14px; 
             border-radius: 8px; 
             margin-bottom: 20px; 
-            font-weight: 600; 
+            font-weight: 500; 
             font-size: 0.9rem;
         }
 
@@ -210,7 +355,7 @@
             color: white; 
             border: none; 
             cursor: pointer; 
-            font-weight: bold; 
+            font-weight: 500; 
             margin-top: 5px;
             transition: background-color 0.2s; 
         }
@@ -260,10 +405,27 @@
                 margin-left: 0;
                 width: 250px;
             }
+
+            .a11y-widget {
+                top: 10px;
+                right: 10px;
+            }
         }
     </style>
 </head>
 <body>
+
+<!-- Accessibility Floating Widget -->
+<div class="a11y-widget">
+    <button class="a11y-toggle-btn" id="a11yToggle" title="Accessibility Options" aria-label="Accessibility Options">♿</button>
+    <div class="a11y-menu" id="a11yMenu">
+        <h3>Accessibility</h3>
+        <button class="a11y-btn" onclick="adjustFontSize(1)">Increase Text (A+)</button>
+        <button class="a11y-btn" onclick="adjustFontSize(-1)">Decrease Text (A-)</button>
+        <button class="a11y-btn" onclick="toggleHighContrast()">High Contrast</button>
+        <button class="a11y-btn" onclick="resetAccessibility()">Reset Settings</button>
+    </div>
+</div>
 
 <div class="container">
     <div class="header-box">
@@ -316,7 +478,7 @@
         
         <div id="ped_alert" class="alert hidden" style="background: #d1ecf1; color: #0c5460; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 0.9rem;"></div>
         <div id="red_alert" class="alert hidden" style="background: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 0.9rem;">
-            <strong>Diagnostic Caution:</strong> In patients &ge; 50y or with vascular risk, additional confirmation (Spinal MRI, CSF, or CVS) is strongly recommended.
+            <strong>Diagnostic Caution:</strong> In patients &ge; 50y or with vascular risk, additional confirmation (Spinal MRI, CSF, or CVS) is strongly recommended[cite: 1].
         </div>
     </section>
 
@@ -347,7 +509,7 @@
                     <label class="checkbox-item">
                         <input type="checkbox" id="sc_2"> 
                         <span class="tooltip">Spinal Cord (&ge;2 lesions)
-                            <span class="tooltiptext">In Progressive MS (PPMS), 2 or more spinal lesions alone satisfy DIS criteria.</span>
+                            <span class="tooltiptext">In Progressive MS (PPMS), 2 or more spinal lesions alone satisfy DIS criteria[cite: 1].</span>
                         </span>
                     </label>
                 </div>
@@ -355,7 +517,7 @@
                 <label class="checkbox-item">
                     <input type="checkbox" id="on_check"> 
                     <span class="tooltip">Optic Nerve Involvement
-                        <span class="tooltiptext"><b>Verification Thresholds:</b><br>&bull; MRI: One or more intrinsic lesions.<br>&bull; OCT: Inter-eye difference (pRNFL &ge;6&mu;m or GCIPL &ge;4&mu;m).<br>&bull; VEP: Delayed P100 latency (&gt;2.5 SD from mean).</span>
+                        <span class="tooltiptext"><b>Verification Thresholds:</b><br>&bull; MRI: One or more intrinsic lesions[cite: 1].<br>&bull; OCT: Inter-eye difference (pRNFL &ge;6&mu;m or GCIPL &ge;4&mu;m)[cite: 1].<br>&bull; VEP: Delayed P100 latency (&gt;2.5 SD from mean)[cite: 1].</span>
                     </span>
                 </label>
             </div>
@@ -365,28 +527,28 @@
                 <label class="checkbox-item">
                     <input type="checkbox" id="csf"> 
                     <span class="tooltip">CSF Positive (OCB/kFLC)
-                        <span class="tooltiptext">Demonstrated intrathecal IgG synthesis: OCB or positive Kappa Free Light Chain (kFLC) index are interchangeable.</span>
+                        <span class="tooltiptext">Demonstrated intrathecal IgG synthesis: OCB or positive Kappa Free Light Chain (kFLC) index are interchangeable[cite: 1].</span>
                     </span>
                 </label>
 
                 <label class="checkbox-item">
                     <input type="checkbox" id="cvs"> 
                     <span class="tooltip">CVS Positive
-                        <span class="tooltiptext"><b>Select 6 Rule:</b> &ge;6 CVS+ lesions; or majority if &lt;10 lesions exist.<br><b>Pediatrics:</b> Positive only if &ge;50% of lesions show CVS.</span>
+                        <span class="tooltiptext"><b>Select 6 Rule:</b> &ge;6 CVS+ lesions; or majority if &lt;10 lesions exist[cite: 1].<br><b>Pediatrics:</b> Positive only if &ge;50% of lesions show CVS[cite: 1].</span>
                     </span>
                 </label>
 
                 <label class="checkbox-item">
                     <input type="checkbox" id="dit"> 
                     <span class="tooltip">DIT Positive
-                        <span class="tooltiptext">New T2 lesion on follow-up, or simultaneous Gad+ and Gad- lesions on a single scan.</span>
+                        <span class="tooltiptext">New T2 lesion on follow-up, or simultaneous Gad+ and Gad- lesions on a single scan[cite: 1].</span>
                     </span>
                 </label>
 
                 <label class="checkbox-item">
                     <input type="checkbox" id="prl"> 
                     <span class="tooltip">PRL Positive
-                        <span class="tooltiptext">Paramagnetic Rim Lesions: Presence of &ge;1 chronic active lesion with a characteristic iron rim.</span>
+                        <span class="tooltiptext">Paramagnetic Rim Lesions: Presence of &ge;1 chronic active lesion with a characteristic iron rim[cite: 1].</span>
                     </span>
                 </label>
             </div>
@@ -399,12 +561,44 @@
 
     <footer>
         <p><strong>Developed by:</strong> Tal Ganz, Omri Zveik-Lavi. Neurology department, Hadassah-Hebrew University Medical Center.</p>
-        <p><strong>Reference:</strong> Montalban X, Tintore M, et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em>. 2025.</p>
+        <p><strong>Reference:</strong> Montalban X, Tintore M, et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em>. 2025[cite: 1].</p>
         <p><em>For physician use only. Does not replace clinical judgment; final responsibility rests with the user.</em></p>
     </footer>
 </div>
 
 <script>
+    /* Accessibility Functions */
+    let currentFontSize = 16;
+    const a11yToggle = document.getElementById('a11yToggle');
+    const a11yMenu = document.getElementById('a11yMenu');
+
+    a11yToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        a11yMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!a11yMenu.contains(e.target) && e.target !== a11yToggle) {
+            a11yMenu.classList.remove('show');
+        }
+    });
+
+    function adjustFontSize(delta) {
+        currentFontSize = Math.min(Math.max(currentFontSize + delta * 2, 12), 24);
+        document.documentElement.style.setProperty('--base-font-size', currentFontSize + 'px');
+    }
+
+    function toggleHighContrast() {
+        document.body.classList.toggle('high-contrast');
+    }
+
+    function resetAccessibility() {
+        currentFontSize = 16;
+        document.documentElement.style.setProperty('--base-font-size', '16px');
+        document.body.classList.remove('high-contrast');
+    }
+
+    /* Core Diagnostic Logic */
     function updateUi() {
         const pres = document.getElementById('presentation').value;
         const isUnder12 = document.getElementById('peds_under_12').checked;
@@ -419,10 +613,10 @@
         const pedAlert = document.getElementById('ped_alert');
         if (isUnder12 || isADEM) {
             pedAlert.style.display = 'block';
-            pedAlert.innerHTML = "<strong>Pediatric Alert:</strong> MOG-IgG testing is strongly recommended for children &lt; 12y or ADEM presentations. CVS is positive only if &ge; 50% of lesions are involved.";
+            pedAlert.innerHTML = "<strong>Pediatric Alert:</strong> MOG-IgG testing is strongly recommended for children &lt; 12y or ADEM presentations[cite: 1]. CVS is positive only if &ge; 50% of lesions are involved[cite: 1].";
         } else if (is12to18) {
             pedAlert.style.display = 'block';
-            pedAlert.innerHTML = "<strong>Pediatric Alert:</strong> MOG-IgG testing is recommended in non-specific symptoms or suggestive of MOGAD. CVS is positive only if &ge; 50% of lesions are involved.";
+            pedAlert.innerHTML = "<strong>Pediatric Alert:</strong> MOG-IgG testing is recommended in non-specific symptoms or suggestive of MOGAD[cite: 1]. CVS is positive only if &ge; 50% of lesions are involved[cite: 1].";
         } else {
             pedAlert.style.display = 'none';
         }
@@ -441,7 +635,7 @@
 
         if (!mimicsExcluded) {
             res.className = "result-box res-negative";
-            res.innerHTML = "<strong>Gatekeeper:</strong> Please confirm that mimics and better explanations have been excluded.";
+            res.innerHTML = "<strong>Gatekeeper:</strong> Please confirm that mimics and better explanations have been excluded[cite: 1].";
             return;
         }
 
@@ -481,22 +675,22 @@
 
             if (effectiveDIS >= 4) {
                 status = "positive";
-                msg = "DIS criteria met (4+ sites).";
+                msg = "DIS criteria met (4+ sites)[cite: 1].";
             } else if (effectiveDIS >= 2 && (csf || dit || cvs)) {
                 status = "positive";
-                msg = "DIS criteria met (&ge;2 sites) with supportive evidence (CSF, DIT, or CVS).";
+                msg = "DIS criteria met (&ge;2 sites) with supportive evidence (CSF, DIT, or CVS)[cite: 1].";
             } else if (effectiveDIS === 1 && ((csf || dit) && (cvs || prl))) {
                 status = "positive";
-                msg = "Single-location pathway met (Supportive Marker + Specificity Marker).";
+                msg = "Single-location pathway met (Supportive Marker + Specificity Marker)[cite: 1].";
             }
         } else if (pres === 'ris') {
             if (disCount >= 2 && (csf || cvs || dit)) {
                 status = "positive";
-                msg = "RIS criteria met (DIS &ge;2 + supportive marker).";
+                msg = "RIS criteria met (DIS &ge;2 + supportive marker)[cite: 1].";
             }
         } else if (isADEM) {
             res.className = "result-box res-negative";
-            res.innerHTML = "<strong>Diagnosis Deferred:</strong> In ADEM-like presentations, MS cannot be diagnosed until a second typical attack occurs or new lesions appear &gt; 90 days from onset.";
+            res.innerHTML = "<strong>Diagnosis Deferred:</strong> In ADEM-like presentations, MS cannot be diagnosed until a second typical attack occurs or new lesions appear &gt; 90 days from onset[cite: 1].";
             return;
         }
 
@@ -505,12 +699,12 @@
             let warnings = [];
 
             if (isOld && !(document.getElementById('sc_1').checked || csf || cvs)) {
-                warnings.push("⚠️ <strong>Caution:</strong> In patients &ge;50y or with vascular risks, confirmation via Spinal, CSF, or CVS is strongly recommended to avoid misdiagnosis.");
+                warnings.push("⚠️ <strong>Caution:</strong> In patients &ge;50y or with vascular risks, confirmation via Spinal, CSF, or CVS is strongly recommended to avoid misdiagnosis[cite: 1].");
             }
             if ((isUnder12 || isADEM) && !mogChecked) {
-                warnings.push("ℹ️ <strong>Pediatric Note:</strong> Differential diagnosis for MOGAD is mandatory (MOG-IgG check strongly recommended).");
+                warnings.push("ℹ️ <strong>Pediatric Note:</strong> Differential diagnosis for MOGAD is mandatory (MOG-IgG check strongly recommended)[cite: 1].");
             } else if (is12to18 && !mogChecked) {
-                warnings.push("ℹ️ <strong>Pediatric Note:</strong> MOG-IgG testing is recommended if symptoms are non-specific or suggestive of MOGAD.");
+                warnings.push("ℹ️ <strong>Pediatric Note:</strong> MOG-IgG testing is recommended if symptoms are non-specific or suggestive of MOGAD[cite: 1].");
             }
 
             if (warnings.length > 0) {
@@ -522,7 +716,7 @@
             }
         } else {
             res.className = "result-box res-negative";
-            res.innerHTML = "<strong>Criteria not fully met.</strong> Monitor clinical course or re-evaluate differential diagnosis.";
+            res.innerHTML = "<strong>Criteria not fully met.</strong> Monitor clinical course or re-evaluate differential diagnosis[cite: 1].";
         }
     }
 </script>
