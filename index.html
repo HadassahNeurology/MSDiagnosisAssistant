@@ -367,9 +367,10 @@
             background-color: #2980b9; 
         }
 
+        /* Mobile Shortcut Container inside Footer */
         .mobile-install-container {
             display: none;
-            margin-top: 25px;
+            margin-bottom: 18px;
             text-align: center;
         }
 
@@ -395,6 +396,7 @@
             background-color: #f0f4f8;
         }
 
+        /* Modal for Instructions */
         .mobile-modal {
             display: none;
             position: fixed;
@@ -632,14 +634,7 @@
 
     <div id="result" class="result-box"></div>
 
-    <!-- Mobile-Only Add to Home Screen Button -->
-    <div id="mobileInstallContainer" class="mobile-install-container">
-        <button id="mobileInstallBtn" class="install-btn" type="button">
-            📱 Add to Home Screen
-        </button>
-    </div>
-
-    <!-- Mobile Instructions Modal -->
+    <!-- Instructions Modal -->
     <div id="mobileModal" class="mobile-modal">
         <div class="mobile-modal-content">
             <h4 id="modalTitle" style="margin: 0 0 12px 0; color: #2c3e50; font-size: 1.1rem;">Add to Home Screen</h4>
@@ -649,6 +644,13 @@
     </div>
 
     <footer>
+        <!-- Mobile-Only Add to Home Screen Button (Under dividing line, above credits) -->
+        <div id="mobileInstallContainer" class="mobile-install-container">
+            <button id="mobileInstallBtn" class="install-btn" type="button">
+                📱 Add to Home Screen
+            </button>
+        </div>
+
         <p><strong>Developed by:</strong> Tal Ganz, Omri Zveik-Lavi. Neurology department, Hadassah-Hebrew University Medical Center.</p>
         <p><strong>Reference:</strong> Montalban X, Tintore M, et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em>. 2025.</p>
         <p><em>For physician use only. Does not replace clinical judgment; final responsibility rests with the user.</em></p>
