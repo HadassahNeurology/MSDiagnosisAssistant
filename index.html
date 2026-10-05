@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MS Diagnostic Assistant | Hadassah</title>
 
-    <!-- App Icon for iOS & Android Home Screen -->
-    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512'%3E%3Crect width='512' height='512' rx='100' fill='%23ffffff'/%3E%3Ctext x='50%25' y='38%25' text-anchor='middle' font-family='Roboto Condensed, sans-serif' font-weight='700' font-size='82' fill='%232c3e50'%3EMS%3C/text%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-family='Roboto Condensed, sans-serif' font-weight='700' font-size='42' fill='%232c3e50'%3EDiagnostic%3C/text%3E%3Ctext x='50%25' y='72%25' text-anchor='middle' font-family='Roboto Condensed, sans-serif' font-weight='700' font-size='42' fill='%232c3e50'%3EAssistant%3C/text%3E%3C/svg%3E">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%23ffffff'/%3E%3Ctext x='50%25' y='38%25' text-anchor='middle' font-family='Roboto Condensed, sans-serif' font-weight='700' font-size='82' fill='%232c3e50'%3EMS%3C/text%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-family='Roboto Condensed, sans-serif' font-weight='700' font-size='42' fill='%232c3e50'%3EDiagnostic%3C/text%3E%3Ctext x='50%25' y='72%25' text-anchor='middle' font-family='Roboto Condensed, sans-serif' font-weight='700' font-size='42' fill='%232c3e50'%3EAssistant%3C/text%3E%3C/svg%3E">
+    <!-- App Icon for iOS & Android Home Screen (White background, Dark Blue "MS", Roboto Condensed) -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512'%3E%3Crect width='512' height='512' rx='100' fill='%23ffffff'/%3E%3Ctext x='50%25' y='65%25' text-anchor='middle' font-family='Roboto Condensed, sans-serif' font-weight='700' font-size='220' fill='%232c3e50'%3EMS%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%23ffffff'/%3E%3Ctext x='50%25' y='65%25' text-anchor='middle' font-family='Roboto Condensed, sans-serif' font-weight='700' font-size='220' fill='%232c3e50'%3EMS%3C/text%3E%3C/svg%3E">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -367,7 +367,7 @@
             background-color: #2980b9; 
         }
 
-        /* Mobile Shortcut Container - hidden by default on desktop, visible on mobile via media query */
+        /* Mobile Shortcut Container at Bottom */
         .mobile-install-container {
             display: none;
             margin-top: 25px;
@@ -396,7 +396,7 @@
             background-color: #f0f4f8;
         }
 
-        /* Modal for iOS / Android Instructions */
+        /* Modal for Instructions */
         .mobile-modal {
             display: none;
             position: fixed;
@@ -453,7 +453,6 @@
             display: none; 
         }
 
-        /* Mobile specific view */
         @media (max-width: 768px) {
             body {
                 padding: 10px;
@@ -483,7 +482,6 @@
                 right: 10px;
             }
 
-            /* Always show the install button on mobile devices */
             .mobile-install-container {
                 display: block !important;
             }
@@ -639,16 +637,16 @@
     <!-- Mobile-Only Add to Home Screen Button -->
     <div id="mobileInstallContainer" class="mobile-install-container">
         <button id="mobileInstallBtn" class="install-btn" type="button">
-            📱 Add to Home Screen (App)
+            📱 Add to Home Screen
         </button>
     </div>
 
-    <!-- Instruction Modal for Mobile -->
+    <!-- Mobile Instructions Modal -->
     <div id="mobileModal" class="mobile-modal">
         <div class="mobile-modal-content">
             <h4 id="modalTitle" style="margin: 0 0 12px 0; color: #2c3e50; font-size: 1.1rem;">Add to Home Screen</h4>
             <div id="modalInstructions" style="text-align: left; font-size: 0.95rem; line-height: 1.6; color: #444;"></div>
-            <button onclick="document.getElementById('mobileModal').style.display='none'">Got it</button>
+            <button type="button" onclick="document.getElementById('mobileModal').style.display='none'">Got it</button>
         </div>
     </div>
 
@@ -675,35 +673,32 @@
         const modalTitle = document.getElementById('modalTitle');
         const modalInstructions = document.getElementById('modalInstructions');
 
-        if (isIOS) {
-            btn.innerHTML = "📱 Add to iPhone/iPad Home Screen";
-            btn.onclick = () => {
-                modalTitle.innerText = "Install on iPhone / iPad";
+        btn.innerText = "📱 Add to Home Screen";
+
+        btn.onclick = async () => {
+            modalTitle.innerText = "Add to Home Screen";
+            if (isIOS) {
                 modalInstructions.innerHTML = `
-                    1. Tap the <strong>Share</strong> button (<strong>⎋</strong> / square with arrow up) at the bottom toolbar of Safari.<br><br>
-                    2. Scroll down and select <strong>"Add to Home Screen"</strong> (➕).<br><br>
+                    1. Tap the <strong>Share</strong> button (<strong>⎋</strong> / square with arrow up) in Safari.<br><br>
+                    2. Scroll down and tap <strong>"Add to Home Screen"</strong> (➕).<br><br>
                     3. Tap <strong>Add</strong> in the top-right corner.
                 `;
                 modal.style.display = 'flex';
-            };
-        } else {
-            btn.innerHTML = "📱 Add to Android Home Screen";
-            btn.onclick = async () => {
+            } else {
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
                     await deferredPrompt.userChoice;
                     deferredPrompt = null;
                 } else {
-                    modalTitle.innerText = "Install on Android";
                     modalInstructions.innerHTML = `
-                        1. Tap the <strong>Menu</strong> icon (<strong>⋮</strong> three dots) at the top right of Chrome.<br><br>
-                        2. Tap <strong>"Install app"</strong> or <strong>"Add to Home screen"</strong>.<br><br>
-                        3. Follow the prompt to complete installation.
+                        1. Tap the <strong>Menu</strong> icon (<strong>⋮</strong> three dots) in Chrome.<br><br>
+                        2. Tap <strong>"Add to Home screen"</strong>.<br><br>
+                        3. Confirm to add the shortcut.
                     `;
                     modal.style.display = 'flex';
                 }
-            };
-        }
+            }
+        };
     });
 
     /* Accessibility Functions */
