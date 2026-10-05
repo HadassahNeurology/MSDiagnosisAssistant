@@ -370,25 +370,27 @@
         /* Mobile Shortcut Container inside Footer */
         .mobile-install-container {
             display: none;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             text-align: center;
         }
 
+        /* Fitted Button - strictly wraps content */
         .install-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            width: 100%;
+            gap: 6px;
+            width: auto;
+            max-width: fit-content;
             background-color: #ffffff;
             color: #2c3e50;
-            border: 2px solid #2c3e50;
-            padding: 12px 18px;
-            border-radius: 25px;
-            font-size: 0.95rem;
-            font-weight: 600;
+            border: 1.5px solid #2c3e50;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
             transition: all 0.2s ease;
         }
 
@@ -644,7 +646,7 @@
     </div>
 
     <footer>
-        <!-- Mobile-Only Add to Home Screen Button (Under dividing line, above credits) -->
+        <!-- Mobile-Only Add to Home Screen Button (Auto-fitted, under dividing line, above credits) -->
         <div id="mobileInstallContainer" class="mobile-install-container">
             <button id="mobileInstallBtn" class="install-btn" type="button">
                 📱 Add to Home Screen
