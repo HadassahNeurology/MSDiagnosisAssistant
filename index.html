@@ -4,10 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MS Diagnostic Assistant | Hadassah</title>
-    <!-- Import Google Font: Roboto (Regular) -->
+
+    <!-- Web App & iOS Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="MS Diagnostic">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Inline SVG Icon for Home Screen (White background, Dark Blue text, Roboto Condensed) -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%23ffffff'/%3E%3Cstyle%3E@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700%26display=swap'); text %7B font-family: 'Roboto Condensed', sans-serif; font-weight: 700; fill: %231a365d; text-anchor: middle; %7D%3C/style%3E%3Ctext x='256' y='180' font-size='90'%3EMS%3C/text%3E%3Ctext x='256' y='285' font-size='56'%3EDiagnostic%3C/text%3E%3Ctext x='256' y='365' font-size='56'%3EAssistant%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%23ffffff'/%3E%3Cstyle%3E@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700%26display=swap'); text %7B font-family: 'Roboto Condensed', sans-serif; font-weight: 700; fill: %231a365d; text-anchor: middle; %7D%3C/style%3E%3Ctext x='256' y='180' font-size='90'%3EMS%3C/text%3E%3Ctext x='256' y='285' font-size='56'%3EDiagnostic%3C/text%3E%3Ctext x='256' y='365' font-size='56'%3EAssistant%3C/text%3E%3C/svg%3E">
+
+    <!-- Embedded Web Manifest -->
+    <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22MS%20Diagnostic%20Assistant%22%2C%22short_name%22%3A%22MS%20Diagnostic%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23ffffff%22%2C%22theme_color%22%3A%22%23ffffff%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20512%20512'%253E%253Crect%20width%3D'512'%20height%3D'512'%20rx%3D'100'%20fill%3D'%2523ffffff'%2F%253E%253Cstyle%253E%40import%20url('https%3A%2F%2Ffonts.googleapis.com%2Fcss2%3Ffamily%3DRoboto%2BCondensed%3Awght%40700%26display%3Dswap')%3B%20text%20%257B%20font-family%3A%20'Roboto%20Condensed'%2C%20sans-serif%3B%20font-weight%3A%20700%3B%20fill%3A%20%25231a365d%3B%20text-anchor%3A%20middle%3B%20%257D%253C%2Fstyle%253E%253Ctext%20x%3D'256'%20y%3D'180'%20font-size%3D'90'%253EMS%253C%2Ftext%253E%253Ctext%20x%3D'256'%20y%3D'285'%20font-size%3D'56'%253EDiagnostic%253C%2Ftext%253E%253Ctext%20x%3D'256'%20y%3D'365'%20font-size%3D'56'%253EAssistant%253C%2Ftext%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
+
+    <!-- Import Google Fonts: Roboto & Roboto Condensed -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
     <style>
         :root { 
             --primary: #2c3e50; 
@@ -46,7 +62,7 @@
             position: relative;
         }
 
-        /* Accessibility Widget - Positioned lower to avoid overlapping header */
+        /* Accessibility Widget */
         .a11y-widget {
             position: fixed;
             top: 85px;
@@ -338,6 +354,740 @@
         .res-caution { background-color: #fff3cd; border: 1px solid #ffeeba; color: #856404; }
         .res-negative { background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
         
+        select, .btn-eval { 
+            width: 100%; 
+            padding: 12px; 
+            border-radius: 6px; 
+            border: 1px solid #ccc; 
+            font-size: 1rem; 
+        }
+
+        select {
+            background-color: #fff;
+        }
+
+        .btn-eval { 
+            background-color: var(--secondary); 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+            font-weight: 500; 
+            margin-top: 5px;
+            transition: background-color 0.2s; 
+        }
+
+        .btn-eval:hover { 
+            background-color: #2980b9; 
+        }
+
+        footer { 
+            margin-top: 30px; 
+            padding-top: 15px; 
+            border-top: 1px solid #eee; 
+            font-size: 0.85rem; 
+            color: #7f8c8d; 
+            text-align: center; 
+        }
+
+        footer p { 
+            margin: 3px 0; 
+            line-height: 1.35; 
+        }
+
+        /* Mobile Install / Shortcut Container */
+        #mobile_install_container {
+            display: none;
+            margin-top: 20px;
+            padding: 14px;
+            background: #eef5fb;
+            border: 1px solid #c9e0f3;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .mobile-install-btn {
+            background-color: #2c3e50;
+            color: #ffffff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            max-width: 340px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: background 0.2s;
+        }
+
+        .mobile-install-btn:hover {
+            background-color: #1a252f;
+        }
+
+        /* iOS Modal Instructions */
+        .ios-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .ios-modal-content {
+            background: #ffffff;
+            width: 100%;
+            max-width: 480px;
+            padding: 22px;
+            border-radius: 16px 16px 0 0;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
+            text-align: center;
+            position: relative;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .ios-modal-content h4 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .ios-modal-content ol {
+            text-align: left;
+            margin: 15px 0 20px 20px;
+            padding: 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .ios-close-btn {
+            background: #f0f4f8;
+            border: 1px solid #ccc;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            font-weight: 500;
+            width: 100%;
+        }
+
+        .hidden { 
+            display: none; 
+        }
+
+        @media (max-width: 650px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 16px;
+            }
+
+            .workup-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .flex-row {
+                gap: 10px 14px;
+            }
+
+            .tooltip .tooltiptext {
+                left: 0;
+                margin-left: 0;
+                width: 250px;
+            }
+
+            .a11y-widget {
+                top: 75px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Accessibility Floating Widget -->
+<div class="a11y-widget">
+    <button class="a11y-toggle-btn" id="a11yToggle" title="Accessibility Options" aria-label="Accessibility Options">♿</button>
+    <div class="a11y-menu" id="a11yMenu">
+        <h3>Accessibility</h3>
+        <button class="a11y-btn" onclick="adjustFontSize(1)">Increase Text (A+)</button>
+        <button class="a11y-btn" onclick="adjustFontSize(-1)">Decrease Text (A-)</button>
+        <button class="a11y-btn" onclick="toggleHighContrast()">High Contrast</button>
+        <button class="a11y-btn" onclick="resetAccessibility()">Reset Settings</button>
+    </div>
+</div>
+
+<div class="container">
+    <div class="header-box">
+        <img src="hadassah-logo.png" alt="Hadassah Logo" class="logo-img" onerror="this.style.display='none'">
+        <h1>Multiple Sclerosis Diagnostic Assistant <br><span class="subtitle">(Revised 2024 McDonald Criteria)</span></h1>
+    </div>
+
+    <!-- Mandatory Gatekeeper -->
+    <div class="gatekeeper">
+        <label style="cursor: pointer; display: flex; align-items: flex-start; gap: 8px;">
+            <input type="checkbox" id="mimics_excluded" style="margin-top: 3px;"> 
+            <span>I confirm that symptoms are typical for MS and all mimics/better explanations have been excluded.</span>
+        </label>
+    </div>
+
+    <!-- 1. Patient Profile -->
+    <section id="profile_section">
+        <h2>1. Patient Profile</h2>
+        
+        <div class="profile-group">
+            <span class="group-title"><strong>Age at presentation:</strong></span>
+            <div class="flex-row">
+                <label class="font-match"><input type="radio" name="age_group" id="peds_under_12"> &lt; 12y</label>
+                <label class="font-match"><input type="radio" name="age_group" id="peds_12_18"> 12–18y</label>
+                <label class="font-match"><input type="radio" name="age_group" id="age_18_50"> 18–50y</label>
+                <label class="font-match"><input type="radio" name="age_group" id="age_50"> &ge; 50y</label>
+            </div>
+        </div>
+
+        <div class="profile-group">
+            <span class="group-title"><strong>Risk factors & special workup:</strong></span>
+            <div class="flex-row">
+                <label class="font-match">
+                    <input type="checkbox" id="vasc_risk"> 
+                    <span class="tooltip">Vascular Risk
+                        <span class="tooltiptext">Includes: Hypertension, Smoking, Diabetes, Hyperlipidemia, or known Macrovascular disease.</span>
+                    </span>
+                </label>
+                
+                <div id="mog_logic_container" class="hidden">
+                    <label class="font-match">
+                        <input type="checkbox" id="mog_checked"> 
+                        <span class="tooltip">MOG-IgG Checked
+                            <span class="tooltiptext">Recommended/Mandatory in selected pediatric or atypical populations to exclude MOGAD before confirming MS.</span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <div id="ped_alert" class="alert hidden" style="background: #d1ecf1; color: #0c5460; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 0.9rem;"></div>
+        <div id="red_alert" class="alert hidden" style="background: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 0.9rem;">
+            <strong>Diagnostic Caution:</strong> In patients &ge; 50y or with vascular risk, additional confirmation (Spinal MRI, CSF, or CVS) is strongly recommended[cite: 1].
+        </div>
+    </section>
+
+    <!-- 2. Clinical Presentation -->
+    <section>
+        <h2>2. Clinical Presentation</h2>
+        <select id="presentation" onchange="updateUi()">
+            <option value="">-- Select Presentation --</option>
+            <option value="relapsing">Typical Attack (Relapsing-Onset / CIS)</option>
+            <option value="progressive">Objective Progression (&ge; 12 months)</option>
+            <option value="ris">RIS / Non-specific Symptoms</option>
+            <option value="adem">ADEM-like Presentation</option>
+        </select>
+    </section>
+
+    <!-- 3. Evidence & Biomarkers -->
+    <section>
+        <h2>3. Evidence & Biomarkers</h2>
+        <div class="workup-grid">
+            <div>
+                <span class="group-title"><strong>DIS (Anatomical Sites):</strong></span>
+                <label class="checkbox-item"><input type="checkbox" id="pv"> Periventricular</label>
+                <label class="checkbox-item"><input type="checkbox" id="ct"> Cortical/Juxtacortical</label>
+                <label class="checkbox-item"><input type="checkbox" id="it"> Infratentorial</label>
+                <label class="checkbox-item"><input type="checkbox" id="sc_1"> Spinal Cord (Typical Lesion)</label>
+                
+                <div id="sp_prog_box" class="hidden" style="padding-left: 15px; border-left: 2px solid #ddd; margin: 4px 0 6px 0;">
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="sc_2"> 
+                        <span class="tooltip">Spinal Cord (&ge;2 lesions)
+                            <span class="tooltiptext">In Progressive MS (PPMS), 2 or more spinal lesions alone satisfy DIS criteria[cite: 1].</span>
+                        </span>
+                    </label>
+                </div>
+
+                <label class="checkbox-item">
+                    <input type="checkbox" id="on_check"> 
+                    <span class="tooltip">Optic Nerve Involvement
+                        <span class="tooltiptext"><b>Verification Thresholds:</b><br>&bull; MRI: One or more intrinsic lesions[cite: 1].<br>&bull; OCT: Inter-eye difference (pRNFL &ge;6&mu;m or GCIPL &ge;4&mu;m)[cite: 1].<br>&bull; VEP: Delayed P100 latency (&gt;2.5 SD from mean)[cite: 1].</span>
+                    </span>
+                </label>
+            </div>
+            
+            <div>
+                <span class="group-title"><strong>Supportive Biomarkers:</strong></span>
+                <label class="checkbox-item">
+                    <input type="checkbox" id="csf"> 
+                    <span class="tooltip">CSF Positive (OCB/kFLC)
+                        <span class="tooltiptext">Demonstrated intrathecal IgG synthesis: OCB or positive Kappa Free Light Chain (kFLC) index are interchangeable[cite: 1].</span>
+                    </span>
+                </label>
+
+                <label class="checkbox-item">
+                    <input type="checkbox" id="cvs"> 
+                    <span class="tooltip">CVS Positive
+                        <span class="tooltiptext"><b>Select 6 Rule:</b> &ge;6 CVS+ lesions; or majority if &lt;10 lesions exist[cite: 1].<br><b>Pediatrics:</b> Positive only if &ge;50% of lesions show CVS[cite: 1].</span>
+                    </span>
+                </label>
+
+                <label class="checkbox-item">
+                    <input type="checkbox" id="dit"> 
+                    <span class="tooltip">DIT Positive
+                        <span class="tooltiptext">New T2 lesion on follow-up, or simultaneous Gad+ and Gad- lesions on a single scan[cite: 1].</span>
+                    </span>
+                </label>
+
+                <label class="checkbox-item">
+                    <input type="checkbox" id="prl"> 
+                    <span class="tooltip">PRL Positive
+                        <span class="tooltiptext">Paramagnetic Rim Lesions: Presence of &ge;1 chronic active lesion with a characteristic iron rim[cite: 1].</span>
+                    </span>
+                </label>
+            </div>
+        </div>
+    </section>
+
+    <button type="button" class="btn-eval" onclick="evaluateCriteria()">Evaluate Diagnosis</button>
+
+    <div id="result" class="result-box"></div>
+
+    <!-- Mobile-Only Add to Home Screen Link/Button -->
+    <div id="mobile_install_container">
+        <button type="button" class="mobile-install-btn" id="mobileInstallBtn">
+            📲 Add to Home Screen (App)
+        </button>
+    </div>
+
+    <footer>
+        <p><strong>Developed by:</strong> Tal Ganz, Omri Zveik-Lavi. Neurology department, Hadassah-Hebrew University Medical Center.</p>
+        <p><strong>Reference:</strong> Montalban X, Tintore M, et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em>. 2025[cite: 1].</p>
+        <p><em>For physician use only. Does not replace clinical judgment; final responsibility rests with the user.</em></p>
+    </footer>
+</div>
+
+<!-- iOS Specific Guide Modal -->
+<div id="iosModal" class="ios-modal">
+    <div class="ios-modal-content">
+        <h4>Add Assistant to Home Screen</h4>
+        <p style="font-size: 0.9rem; color: #555; margin-bottom: 10px;">To install on your iPhone / iPad:</p>
+        <ol>
+            <li>Tap the <strong>Share</strong> icon ( <span style="font-size: 1.2rem;">⎋</span> / square with arrow up) in Safari's bottom toolbar.</li>
+            <li>Scroll down and tap <strong>"Add to Home Screen"</strong> (➕).</li>
+            <li>Tap <strong>Add</strong> in the top right corner.</li>
+        </ol>
+        <button type="button" class="ios-close-btn" onclick="closeIosModal()">Got it</button>
+    </div>
+</div>
+
+<script>
+    /* Accessibility Functions */
+    let currentFontSize = 16;
+    const a11yToggle = document.getElementById('a11yToggle');
+    const a11yMenu = document.getElementById('a11yMenu');
+
+    a11yToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        a11yMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!a11yMenu.contains(e.target) && e.target !== a11yToggle) {
+            a11yMenu.classList.remove('show');
+        }
+    });
+
+    function adjustFontSize(delta) {
+        currentFontSize = Math.min(Math.max(currentFontSize + delta * 2, 12), 24);
+        document.documentElement.style.setProperty('--base-font-size', currentFontSize + 'px');
+    }
+
+    function toggleHighContrast() {
+        document.body.classList.toggle('high-contrast');
+    }
+
+    function resetAccessibility() {
+        currentFontSize = 16;
+        document.documentElement.style.setProperty('--base-font-size', '16px');
+        document.body.classList.remove('high-contrast');
+    }
+
+    /* Mobile OS Detection & Add to Home Screen Handling */
+    let deferredPrompt = null;
+    const installContainer = document.getElementById('mobile_install_container');
+    const installBtn = document.getElementById('mobileInstallBtn');
+    const iosModal = document.getElementById('iosModal');
+
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+    const isAndroid = /android/i.test(userAgent);
+    const isStandalone = window.matchMedia('(כדי לאפשר התקנה והוספה למסך הבית (PWA) עם תמיכה ייעודית גם ל-iOS (Safari) וגם ל-Android (Chrome), נדרשים שני מרכיבים:
+
+1. **אייקון ייעודי למסך הבית:** הגדרת אייקון (באמצעות קוד SVG מוטמע ברקע לבן עם טקסט כחול כהה בפונט Roboto Condensed) המוגדר ב-`<link rel="apple-touch-icon">` ובקובץ הגדרות.
+2. **הבדל מערכות הפעלה:**
+   * **באנדרואיד:** הדפדפן מאפשר "התקנה" בלחיצה באמצעות אירוע `beforeinstallprompt`. הכפתור יפעיל את חלון ההתקנה הרשמי.
+   * **ב-iOS (אפל):** מערכת ההפעלה אינה מאפשרת פקודת התקנה ישירה בקוד, אלא מחייבת לחיצה על כפתור השיתוף (Share ⎋) ובחירה ב-"הוסף למסך הבית" (Add to Home Screen). לכן בלחיצה מ-iPhone תפתח חלונית קופצת ברורה עם הדרכה צעד-אחר-צעד.
+
+הנה הקוד המלא והמעודכן להעתקה לתוך `index.html` ב-GitHub:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MS Diagnostic Assistant | Hadassah</title>
+
+    <!-- App Icon for iOS & Android Home Screen -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)' viewBox='0 0 512 512' width='512' height='512'%3E%3Crect width='512' height='512' rx='100' fill='%23ffffff'/%3E%3Ctext x='50%25' y='38%25' text-anchor='middle' font-family='Roboto Condensed, sans-serif' font-weight='700' font-size='82' fill='%232c3e50'%3EMS%3C/text%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-family='Roboto Condensed, sans-serif' font-weight='700' font-size='42' fill='%232c3e50'%3EDiagnostic%3C/text%3E%3Ctext x='50%25' y='72%25' text-anchor='middle' font-family='Roboto Condensed, sans-serif' font-weight='700' font-size='42' fill='%232c3e50'%3EAssistant%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%23ffffff'/%3E%3Ctext x='50%25' y='38%25' text-anchor='middle' font-family='Roboto Condensed, sans-serif' font-weight='700' font-size='82' fill='%232c3e50'%3EMS%3C/text%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-family='Roboto Condensed, sans-serif' font-weight='700' font-size='42' fill='%232c3e50'%3EDiagnostic%3C/text%3E%3Ctext x='50%25' y='72%25' text-anchor='middle' font-family='Roboto Condensed, sans-serif' font-weight='700' font-size='42' fill='%232c3e50'%3EAssistant%3C/text%3E%3C/svg%3E">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+    <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+    <link href="[https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@700&display=swap](https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@700&display=swap)" rel="stylesheet">
+
+    <style>
+        :root { 
+            --primary: #2c3e50; 
+            --secondary: #3498db; 
+            --success: #27ae60; 
+            --warning: #f39c12; 
+            --danger: #e74c3c; 
+            --base-font-size: 16px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        html {
+            font-size: var(--base-font-size);
+        }
+
+        body { 
+            line-height: 1.5; 
+            color: #333; 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 15px; 
+            background-color: #f4f7f6; 
+            transition: background-color 0.2s, color 0.2s; 
+        }
+
+        .container { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+            position: relative;
+        }
+
+        .a11y-widget {
+            position: fixed;
+            top: 85px;
+            right: 15px;
+            z-index: 1000;
+        }
+
+        .a11y-toggle-btn {
+            background-color: #2c3e50;
+            color: #fff;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .a11y-toggle-btn:hover {
+            transform: scale(1.05);
+            background-color: #34495e;
+        }
+
+        .a11y-menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            padding: 12px;
+            width: 210px;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .a11y-menu.show {
+            display: flex;
+        }
+
+        .a11y-menu h3 {
+            margin: 0 0 5px 0;
+            font-size: 0.9rem;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 4px;
+            text-align: center;
+        }
+
+        .a11y-btn {
+            background: #f0f4f8;
+            border: 1px solid #dcdcdc;
+            padding: 8px 10px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 500;
+            color: #333;
+            transition: background 0.15s;
+        }
+
+        .a11y-btn:hover {
+            background: #e2e8f0;
+        }
+
+        body.high-contrast {
+            background-color: #000000 !important;
+            color: #ffff00 !important;
+        }
+
+        body.high-contrast .container {
+            background-color: #121212 !important;
+            color: #ffffff !important;
+            border: 2px solid #ffff00 !important;
+            box-shadow: none !important;
+        }
+
+        body.high-contrast section,
+        body.high-contrast .flex-row,
+        body.high-contrast .gatekeeper {
+            background-color: #000000 !important;
+            border-color: #ffff00 !important;
+            color: #ffffff !important;
+        }
+
+        body.high-contrast h1,
+        body.high-contrast h2,
+        body.high-contrast .subtitle,
+        body.high-contrast strong {
+            color: #ffff00 !important;
+            border-color: #ffff00 !important;
+        }
+
+        body.high-contrast .tooltip {
+            color: #00ffff !important;
+            border-bottom-color: #00ffff !important;
+        }
+
+        body.high-contrast .tooltip .tooltiptext {
+            background-color: #222 !important;
+            border: 1px solid #ffff00 !important;
+            color: #ffffff !important;
+        }
+
+        body.high-contrast select,
+        body.high-contrast button {
+            background-color: #000000 !important;
+            color: #ffff00 !important;
+            border: 2px solid #ffff00 !important;
+        }
+
+        body.high-contrast button:hover {
+            background-color: #333333 !important;
+        }
+
+        body.high-contrast .a11y-menu {
+            background-color: #121212 !important;
+            border-color: #ffff00 !important;
+        }
+
+        body.high-contrast .a11y-btn {
+            background-color: #222 !important;
+            color: #ffff00 !important;
+            border-color: #ffff00 !important;
+        }
+
+        .header-box { 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            text-align: center;
+            border-bottom: 2px solid #eee; 
+            padding-bottom: 15px; 
+            margin-bottom: 20px; 
+            gap: 12px;
+        }
+
+        .logo-img { 
+            height: 60px; 
+            max-width: 160px;
+            object-fit: contain;
+        }
+
+        h1 { 
+            color: var(--primary); 
+            font-size: 1.45rem; 
+            margin: 0; 
+            line-height: 1.3;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: #555;
+            font-weight: 400;
+            display: block;
+            margin-top: 4px;
+        }
+
+        section { 
+            margin-bottom: 20px; 
+            padding: 15px; 
+            border: 1px solid #e1e4e8; 
+            border-radius: 8px; 
+        }
+
+        h2 { 
+            font-size: 1.1rem; 
+            color: var(--primary); 
+            margin-top: 0; 
+            margin-bottom: 12px; 
+            border-bottom: 1px solid #eee; 
+            padding-bottom: 5px; 
+            font-weight: 500;
+        }
+        
+        .gatekeeper { 
+            background: #fff3cd; 
+            border: 2px solid #ffeeba; 
+            padding: 14px; 
+            border-radius: 8px; 
+            margin-bottom: 20px; 
+            font-weight: 500; 
+            font-size: 0.9rem;
+        }
+
+        .profile-group { 
+            margin-bottom: 14px; 
+        }
+
+        .profile-group:last-child { 
+            margin-bottom: 0; 
+        }
+
+        .group-title {
+            margin-bottom: 6px;
+            display: block;
+            font-size: 0.95rem;
+        }
+
+        .flex-row { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 12px 18px; 
+            background: #f9f9f9; 
+            padding: 10px 14px; 
+            border-radius: 6px; 
+            align-items: center; 
+        }
+
+        .font-match {
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .workup-grid {
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px;
+        }
+
+        .checkbox-item {
+            margin-bottom: 6px;
+            display: block;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .tooltip { 
+            position: relative; 
+            display: inline-block; 
+            border-bottom: 1px dotted var(--secondary); 
+            cursor: help; 
+            color: var(--secondary); 
+            font-weight: 500; 
+        }
+
+        .tooltip .tooltiptext { 
+            visibility: hidden; 
+            width: 290px; 
+            background-color: #2c3e50; 
+            color: #fff; 
+            text-align: left; 
+            border-radius: 6px; 
+            padding: 12px; 
+            position: absolute; 
+            z-index: 20; 
+            bottom: 125%; 
+            left: 50%; 
+            margin-left: -145px; 
+            opacity: 0; 
+            transition: opacity 0.2s ease-in-out; 
+            font-size: 0.8rem; 
+            font-weight: normal; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25); 
+            line-height: 1.4;
+            pointer-events: none;
+        }
+
+        .tooltip:hover .tooltiptext,
+        .tooltip:active .tooltiptext { 
+            visibility: visible; 
+            opacity: 1; 
+        }
+
+        .result-box { 
+            margin-top: 20px; 
+            padding: 18px; 
+            border-radius: 8px; 
+            display: none; 
+            font-size: 0.95rem;
+        }
+
+        .res-positive { background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
+        .res-caution { background-color: #fff3cd; border: 1px solid #ffeeba; color: #856404; }
+        .res-negative { background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+        
         select, button { 
             width: 100%; 
             padding: 12px; 
@@ -350,7 +1100,7 @@
             background-color: #fff;
         }
 
-        button { 
+        .eval-btn { 
             background-color: var(--secondary); 
             color: white; 
             border: none; 
@@ -360,8 +1110,74 @@
             transition: background-color 0.2s; 
         }
 
-        button:hover { 
+        .eval-btn:hover { 
             background-color: #2980b9; 
+        }
+
+        /* Mobile Shortcut Button in Footer */
+        .mobile-install-container {
+            display: none;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .install-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: auto;
+            max-width: 100%;
+            background-color: #ffffff;
+            color: #2c3e50;
+            border: 2px solid #2c3e50;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            transition: all 0.2s ease;
+        }
+
+        .install-btn:hover {
+            background-color: #f0f4f8;
+        }
+
+        /* Modal for iOS Instructions */
+        .ios-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .ios-modal-content {
+            background: #fff;
+            padding: 22px;
+            border-radius: 12px;
+            max-width: 320px;
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.45;
+        }
+
+        .ios-modal-content button {
+            margin-top: 15px;
+            padding: 8px 16px;
+            width: auto;
+            background: var(--secondary);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
         }
 
         footer { 
@@ -555,170 +1371,27 @@
         </div>
     </section>
 
-    <button type="button" onclick="evaluateCriteria()">Evaluate Diagnosis</button>
+    <button type="button" class="eval-btn" onclick="evaluateCriteria()">Evaluate Diagnosis</button>
 
     <div id="result" class="result-box"></div>
 
+    <!-- Mobile-Only Add to Home Screen Link -->
+    <div id="mobileInstallContainer" class="mobile-install-container">
+        <button id="mobileInstallBtn" class="install-btn" type="button">
+            📱 Add to Home Screen
+        </button>
+    </div>
+
+    <!-- iOS Step Modal -->
+    <div id="iosModal" class="ios-modal">
+        <div class="ios-modal-content">
+            <h4 style="margin: 0 0 10px 0; color: #2c3e50;">Add to Home Screen (iOS)</h4>
+            <p>1. Tap the <strong>Share</strong> button (<strong>⎋</strong>) at the bottom of Safari.</p>
+            <p>2. Scroll down and tap <strong>"Add to Home Screen"</strong> (➕).</p>
+            <button onclick="document.getElementById('iosModal').style.display='none'">Got it</button>
+        </div>
+    </div>
+
     <footer>
         <p><strong>Developed by:</strong> Tal Ganz, Omri Zveik-Lavi. Neurology department, Hadassah-Hebrew University Medical Center.</p>
-        <p><strong>Reference:</strong> Montalban X, Tintore M, et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em>. 2025.</p>
-        <p><em>For physician use only. Does not replace clinical judgment; final responsibility rests with the user.</em></p>
-    </footer>
-</div>
-
-<script>
-    /* Accessibility Functions */
-    let currentFontSize = 16;
-    const a11yToggle = document.getElementById('a11yToggle');
-    const a11yMenu = document.getElementById('a11yMenu');
-
-    a11yToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        a11yMenu.classList.toggle('show');
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!a11yMenu.contains(e.target) && e.target !== a11yToggle) {
-            a11yMenu.classList.remove('show');
-        }
-    });
-
-    function adjustFontSize(delta) {
-        currentFontSize = Math.min(Math.max(currentFontSize + delta * 2, 12), 24);
-        document.documentElement.style.setProperty('--base-font-size', currentFontSize + 'px');
-    }
-
-    function toggleHighContrast() {
-        document.body.classList.toggle('high-contrast');
-    }
-
-    function resetAccessibility() {
-        currentFontSize = 16;
-        document.documentElement.style.setProperty('--base-font-size', '16px');
-        document.body.classList.remove('high-contrast');
-    }
-
-    /* Core Diagnostic Logic */
-    function updateUi() {
-        const pres = document.getElementById('presentation').value;
-        const isUnder12 = document.getElementById('peds_under_12').checked;
-        const is12to18 = document.getElementById('peds_12_18').checked;
-        const isPediatric = isUnder12 || is12to18;
-        const isADEM = (pres === 'adem');
-        const isOld = document.getElementById('age_50').checked || document.getElementById('vasc_risk').checked;
-
-        document.getElementById('mog_logic_container').style.display = (isPediatric || isADEM) ? 'block' : 'none';
-        document.getElementById('sp_prog_box').style.display = (pres === 'progressive') ? 'block' : 'none';
-        
-        const pedAlert = document.getElementById('ped_alert');
-        if (isUnder12 || isADEM) {
-            pedAlert.style.display = 'block';
-            pedAlert.innerHTML = "<strong>Pediatric Alert:</strong> MOG-IgG testing is strongly recommended for children &lt; 12y or ADEM presentations. CVS is positive only if &ge; 50% of lesions are involved.";
-        } else if (is12to18) {
-            pedAlert.style.display = 'block';
-            pedAlert.innerHTML = "<strong>Pediatric Alert:</strong> MOG-IgG testing is recommended in non-specific symptoms or suggestive of MOGAD. CVS is positive only if &ge; 50% of lesions are involved.";
-        } else {
-            pedAlert.style.display = 'none';
-        }
-
-        document.getElementById('red_alert').style.display = isOld ? 'block' : 'none';
-    }
-
-    document.querySelectorAll('#profile_section input').forEach(el => {
-        el.addEventListener('change', updateUi);
-    });
-
-    function evaluateCriteria() {
-        const mimicsExcluded = document.getElementById('mimics_excluded').checked;
-        const res = document.getElementById('result');
-        res.style.display = 'block';
-
-        if (!mimicsExcluded) {
-            res.className = "result-box res-negative";
-            res.innerHTML = "<strong>Gatekeeper:</strong> Please confirm that mimics and better explanations have been excluded.";
-            return;
-        }
-
-        const pres = document.getElementById('presentation').value;
-        if (!pres) {
-            res.className = "result-box res-negative";
-            res.innerHTML = "Please select a clinical presentation.";
-            return;
-        }
-
-        const sites = [];
-        if (document.getElementById('pv').checked) sites.push('pv');
-        if (document.getElementById('ct').checked) sites.push('ct');
-        if (document.getElementById('it').checked) sites.push('it');
-        if (document.getElementById('sc_1').checked || document.getElementById('sc_2').checked) sites.push('sc');
-        if (document.getElementById('on_check').checked) sites.push('on');
-        
-        const disCount = sites.length;
-        const spinal2 = document.getElementById('sc_2').checked;
-        const csf = document.getElementById('csf').checked;
-        const cvs = document.getElementById('cvs').checked;
-        const dit = document.getElementById('dit').checked;
-        const prl = document.getElementById('prl').checked;
-        
-        const isOld = document.getElementById('age_50').checked || document.getElementById('vasc_risk').checked;
-        const isUnder12 = document.getElementById('peds_under_12').checked;
-        const is12to18 = document.getElementById('peds_12_18').checked;
-        const isADEM = (pres === 'adem');
-        const mogChecked = document.getElementById('mog_checked').checked;
-
-        let status = "negative";
-        let msg = "";
-
-        if (pres === 'relapsing' || pres === 'progressive') {
-            let effectiveDIS = disCount;
-            if (pres === 'progressive' && spinal2) effectiveDIS = Math.max(effectiveDIS, 2);
-
-            if (effectiveDIS >= 4) {
-                status = "positive";
-                msg = "DIS criteria met (4+ sites).";
-            } else if (effectiveDIS >= 2 && (csf || dit || cvs)) {
-                status = "positive";
-                msg = "DIS criteria met (&ge;2 sites) with supportive evidence (CSF, DIT, or CVS).";
-            } else if (effectiveDIS === 1 && ((csf || dit) && (cvs || prl))) {
-                status = "positive";
-                msg = "Single-location pathway met (Supportive Marker + Specificity Marker).";
-            }
-        } else if (pres === 'ris') {
-            if (disCount >= 2 && (csf || cvs || dit)) {
-                status = "positive";
-                msg = "RIS criteria met (DIS &ge;2 + supportive marker).";
-            }
-        } else if (isADEM) {
-            res.className = "result-box res-negative";
-            res.innerHTML = "<strong>Diagnosis Deferred:</strong> In ADEM-like presentations, MS cannot be diagnosed until a second typical attack occurs or new lesions appear &gt; 90 days from onset.";
-            return;
-        }
-
-        if (status === "positive") {
-            let finalOutput = `<strong>Findings support a diagnosis of MS under the 2024 McDonald framework.</strong><br>${msg}`;
-            let warnings = [];
-
-            if (isOld && !(document.getElementById('sc_1').checked || csf || cvs)) {
-                warnings.push("⚠️ <strong>Caution:</strong> In patients &ge;50y or with vascular risks, confirmation via Spinal, CSF, or CVS is strongly recommended to avoid misdiagnosis.");
-            }
-            if ((isUnder12 || isADEM) && !mogChecked) {
-                warnings.push("ℹ️ <strong>Pediatric Note:</strong> Differential diagnosis for MOGAD is mandatory (MOG-IgG check strongly recommended).");
-            } else if (is12to18 && !mogChecked) {
-                warnings.push("ℹ️ <strong>Pediatric Note:</strong> MOG-IgG testing is recommended if symptoms are non-specific or suggestive of MOGAD.");
-            }
-
-            if (warnings.length > 0) {
-                res.className = "result-box res-caution";
-                res.innerHTML = finalOutput + "<br><br>" + warnings.join("<br>");
-            } else {
-                res.className = "result-box res-positive";
-                res.innerHTML = finalOutput;
-            }
-        } else {
-            res.className = "result-box res-negative";
-            res.innerHTML = "<strong>Criteria not fully met.</strong> Monitor clinical course or re-evaluate differential diagnosis.";
-        }
-    }
-</script>
-</body>
-</html>
+        <p><strong>Reference:</strong> Montalban X, Tintore M, et al. Diagnosis of multiple sclerosis: 2024 revisions of the
